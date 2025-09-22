@@ -1,0 +1,15 @@
+{
+  "name": "png-db",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "png_db_bg.wasm",
+    "png_db.js",
+    "png_db.d.ts"
+  ],
+  "main": "png_db.js",
+  "types": "png_db.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}

@@ -1,0 +1,33 @@
+[package]
+name = "png-db"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+png = "0.17"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "1.0"
+
+# CLI dependencies (only for native builds)
+clap = { version = "4.0", features = ["derive"], optional = true }
+color-eyre = { version = "0.6", optional = true }
+
+# WASM dependencies
+wasm-bindgen = { version = "0.2", optional = true }
+web-sys = { version = "0.3", optional = true }
+js-sys = { version = "0.3", optional = true }
+
+[features]
+default = ["cli"]
+cli = ["clap", "color-eyre"]
+wasm = ["wasm-bindgen", "web-sys", "js-sys"]
+
+[lib]
+name = "png_db"
+path = "src/lib.rs"
+crate-type = ["cdylib", "rlib"]
+
+[[bin]]
+name = "png-db"
+path = "src/main.rs"

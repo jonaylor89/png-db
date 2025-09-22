@@ -30,39 +30,7 @@ function getStringFromWasm0(ptr, len) {
     return decodeText(ptr, len);
 }
 
-function takeFromExternrefTable0(idx) {
-    const value = wasm.__wbindgen_export_0.get(idx);
-    wasm.__externref_table_dealloc(idx);
-    return value;
-}
-
-function getArrayU8FromWasm0(ptr, len) {
-    ptr = ptr >>> 0;
-    return getUint8ArrayMemory0().subarray(ptr / 1, ptr / 1 + len);
-}
-
 let WASM_VECTOR_LEN = 0;
-
-function passArray8ToWasm0(arg, malloc) {
-    const ptr = malloc(arg.length * 1, 1) >>> 0;
-    getUint8ArrayMemory0().set(arg, ptr / 1);
-    WASM_VECTOR_LEN = arg.length;
-    return ptr;
-}
-
-let cachedUint32ArrayMemory0 = null;
-
-function getUint32ArrayMemory0() {
-    if (cachedUint32ArrayMemory0 === null || cachedUint32ArrayMemory0.byteLength === 0) {
-        cachedUint32ArrayMemory0 = new Uint32Array(wasm.memory.buffer);
-    }
-    return cachedUint32ArrayMemory0;
-}
-
-function getArrayU32FromWasm0(ptr, len) {
-    ptr = ptr >>> 0;
-    return getUint32ArrayMemory0().subarray(ptr / 4, ptr / 4 + len);
-}
 
 const cachedTextEncoder = (typeof TextEncoder !== 'undefined' ? new TextEncoder('utf-8') : { encode: () => { throw Error('TextEncoder not available') } } );
 
@@ -118,6 +86,38 @@ function passStringToWasm0(arg, malloc, realloc) {
     return ptr;
 }
 
+function takeFromExternrefTable0(idx) {
+    const value = wasm.__wbindgen_export_0.get(idx);
+    wasm.__externref_table_dealloc(idx);
+    return value;
+}
+
+function passArray8ToWasm0(arg, malloc) {
+    const ptr = malloc(arg.length * 1, 1) >>> 0;
+    getUint8ArrayMemory0().set(arg, ptr / 1);
+    WASM_VECTOR_LEN = arg.length;
+    return ptr;
+}
+
+function getArrayU8FromWasm0(ptr, len) {
+    ptr = ptr >>> 0;
+    return getUint8ArrayMemory0().subarray(ptr / 1, ptr / 1 + len);
+}
+
+let cachedUint32ArrayMemory0 = null;
+
+function getUint32ArrayMemory0() {
+    if (cachedUint32ArrayMemory0 === null || cachedUint32ArrayMemory0.byteLength === 0) {
+        cachedUint32ArrayMemory0 = new Uint32Array(wasm.memory.buffer);
+    }
+    return cachedUint32ArrayMemory0;
+}
+
+function getArrayU32FromWasm0(ptr, len) {
+    ptr = ptr >>> 0;
+    return getUint32ArrayMemory0().subarray(ptr / 4, ptr / 4 + len);
+}
+
 const WebPngDatabaseFinalization = (typeof FinalizationRegistry === 'undefined')
     ? { register: () => {}, unregister: () => {} }
     : new FinalizationRegistry(ptr => wasm.__wbg_webpngdatabase_free(ptr >>> 0, 1));
@@ -144,44 +144,20 @@ export class WebPngDatabase {
         wasm.__wbg_webpngdatabase_free(ptr, 0);
     }
     /**
-     * @returns {string}
+     * @param {number} width
+     * @param {number} height
+     * @param {string} schema_json
      */
-    get_schema() {
-        let deferred2_0;
-        let deferred2_1;
-        try {
-            const ret = wasm.webpngdatabase_get_schema(this.__wbg_ptr);
-            var ptr1 = ret[0];
-            var len1 = ret[1];
-            if (ret[3]) {
-                ptr1 = 0; len1 = 0;
-                throw takeFromExternrefTable0(ret[2]);
-            }
-            deferred2_0 = ptr1;
-            deferred2_1 = len1;
-            return getStringFromWasm0(ptr1, len1);
-        } finally {
-            wasm.__wbindgen_free(deferred2_0, deferred2_1, 1);
+    constructor(width, height, schema_json) {
+        const ptr0 = passStringToWasm0(schema_json, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.webpngdatabase_new(width, height, ptr0, len0);
+        if (ret[2]) {
+            throw takeFromExternrefTable0(ret[1]);
         }
-    }
-    /**
-     * @returns {Uint8Array}
-     */
-    to_png_bytes() {
-        const ret = wasm.webpngdatabase_to_png_bytes(this.__wbg_ptr);
-        if (ret[3]) {
-            throw takeFromExternrefTable0(ret[2]);
-        }
-        var v1 = getArrayU8FromWasm0(ret[0], ret[1]).slice();
-        wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
-        return v1;
-    }
-    /**
-     * @returns {number}
-     */
-    get_row_count() {
-        const ret = wasm.webpngdatabase_get_row_count(this.__wbg_ptr);
-        return ret >>> 0;
+        this.__wbg_ptr = ret[0] >>> 0;
+        WebPngDatabaseFinalization.register(this, this.__wbg_ptr, this);
+        return this;
     }
     /**
      * @param {Uint8Array} png_bytes
@@ -197,29 +173,17 @@ export class WebPngDatabase {
         return WebPngDatabase.__wrap(ret[0]);
     }
     /**
-     * @returns {Uint32Array}
+     * @param {number} x
+     * @param {number} y
+     * @param {string} data_json
      */
-    get_dimensions() {
-        const ret = wasm.webpngdatabase_get_dimensions(this.__wbg_ptr);
-        var v1 = getArrayU32FromWasm0(ret[0], ret[1]).slice();
-        wasm.__wbindgen_free(ret[0], ret[1] * 4, 4);
-        return v1;
-    }
-    /**
-     * @param {number} width
-     * @param {number} height
-     * @param {string} schema_json
-     */
-    constructor(width, height, schema_json) {
-        const ptr0 = passStringToWasm0(schema_json, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+    insert(x, y, data_json) {
+        const ptr0 = passStringToWasm0(data_json, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         const len0 = WASM_VECTOR_LEN;
-        const ret = wasm.webpngdatabase_new(width, height, ptr0, len0);
-        if (ret[2]) {
-            throw takeFromExternrefTable0(ret[1]);
+        const ret = wasm.webpngdatabase_insert(this.__wbg_ptr, x, y, ptr0, len0);
+        if (ret[1]) {
+            throw takeFromExternrefTable0(ret[0]);
         }
-        this.__wbg_ptr = ret[0] >>> 0;
-        WebPngDatabaseFinalization.register(this, this.__wbg_ptr, this);
-        return this;
     }
     /**
      * @param {string} where_clause
@@ -246,19 +210,6 @@ export class WebPngDatabase {
         }
     }
     /**
-     * @param {number} x
-     * @param {number} y
-     * @param {string} data_json
-     */
-    insert(x, y, data_json) {
-        const ptr0 = passStringToWasm0(data_json, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
-        const len0 = WASM_VECTOR_LEN;
-        const ret = wasm.webpngdatabase_insert(this.__wbg_ptr, x, y, ptr0, len0);
-        if (ret[1]) {
-            throw takeFromExternrefTable0(ret[0]);
-        }
-    }
-    /**
      * @returns {string}
      */
     list_all() {
@@ -278,6 +229,55 @@ export class WebPngDatabase {
         } finally {
             wasm.__wbindgen_free(deferred2_0, deferred2_1, 1);
         }
+    }
+    /**
+     * @returns {Uint8Array}
+     */
+    to_png_bytes() {
+        const ret = wasm.webpngdatabase_to_png_bytes(this.__wbg_ptr);
+        if (ret[3]) {
+            throw takeFromExternrefTable0(ret[2]);
+        }
+        var v1 = getArrayU8FromWasm0(ret[0], ret[1]).slice();
+        wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        return v1;
+    }
+    /**
+     * @returns {string}
+     */
+    get_schema() {
+        let deferred2_0;
+        let deferred2_1;
+        try {
+            const ret = wasm.webpngdatabase_get_schema(this.__wbg_ptr);
+            var ptr1 = ret[0];
+            var len1 = ret[1];
+            if (ret[3]) {
+                ptr1 = 0; len1 = 0;
+                throw takeFromExternrefTable0(ret[2]);
+            }
+            deferred2_0 = ptr1;
+            deferred2_1 = len1;
+            return getStringFromWasm0(ptr1, len1);
+        } finally {
+            wasm.__wbindgen_free(deferred2_0, deferred2_1, 1);
+        }
+    }
+    /**
+     * @returns {Uint32Array}
+     */
+    get_dimensions() {
+        const ret = wasm.webpngdatabase_get_dimensions(this.__wbg_ptr);
+        var v1 = getArrayU32FromWasm0(ret[0], ret[1]).slice();
+        wasm.__wbindgen_free(ret[0], ret[1] * 4, 4);
+        return v1;
+    }
+    /**
+     * @returns {number}
+     */
+    get_row_count() {
+        const ret = wasm.webpngdatabase_get_row_count(this.__wbg_ptr);
+        return ret >>> 0;
     }
 }
 

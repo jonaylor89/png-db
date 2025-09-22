@@ -2,6 +2,15 @@
 name = "png-db"
 version = "0.1.0"
 edition = "2024"
+description = "A database that stores JSON data rows as compressed text within the zTXt chunks of PNG image files"
+license = "MIT"
+authors = ["Johannes Naylor <jonaylor89@gmail.com>"]
+repository = "https://github.com/jonaylor89/png-db"
+homepage = "https://pngdb.jonaylor.com"
+documentation = "https://docs.rs/png-db"
+keywords = ["png", "database", "json", "storage", "compression"]
+categories = ["database", "data-structures"]
+readme = "README.md"
 
 [dependencies]
 png = "0.17"

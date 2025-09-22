@@ -3,7 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PNG Database Demo</title>
+
+    <!-- SEO Meta Tags -->
+    <title>PNG-DB: Store JSON Data in PNG Images | Interactive Web Demo</title>
+    <meta name="description" content="PNG-DB is an innovative database that stores JSON data as compressed text within PNG image files. Try the interactive web demo to create, query, and manage databases stored in PNG format.">
+    <meta name="keywords" content="png database, json storage, image database, webassembly, rust, data storage, compression, zlib, coordinate-based storage">
+    <meta name="author" content="Johannes Naylor">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="en">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="PNG-DB: Store JSON Data in PNG Images">
+    <meta property="og:description" content="An innovative database that stores JSON data as compressed text within PNG image files. Features coordinate-based storage, SQL-like queries, and zlib compression.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pngdb.jonaylor.com">
+    <meta property="og:site_name" content="PNG-DB">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PNG-DB: Store JSON Data in PNG Images">
+    <meta name="twitter:description" content="An innovative database that stores JSON data as compressed text within PNG image files. Try the interactive web demo!">
+    <meta name="twitter:creator" content="@jonaylor89">
+
+    <!-- Additional Meta Tags -->
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="PNG-DB">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://pngdb.jonaylor.com">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "PNG-DB",
+        "description": "A database that stores JSON data rows as compressed text within the zTXt chunks of PNG image files",
+        "applicationCategory": "DatabaseApplication",
+        "operatingSystem": "Web Browser",
+        "url": "https://pngdb.jonaylor.com",
+        "author": {
+            "@type": "Person",
+            "name": "Jonathan Naylor",
+            "url": "https://bio.jonaylor.com"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "screenshot": "https://pngdb.jonaylor.com/images/screenshot.png",
+        "featureList": [
+            "PNG Storage: Stores JSON data in PNG zTXt chunks while maintaining a valid image file",
+            "Schema Definition: Define field types for your JSON data structure",
+            "Coordinate-based Storage: Associate each JSON row with pixel coordinates",
+            "SQL-like Queries: Query data using WHERE clauses with coordinate and JSON field filtering",
+            "Compression: Uses zlib compression for efficient storage of JSON data",
+            "Web Demo: Interactive browser-based demo compiled to WebAssembly"
+        ]
+    }
+    </script>
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>

@@ -1,15 +1,32 @@
 {
   "name": "png-db",
   "type": "module",
+  "collaborators": [
+    "Johannes Naylor <jonaylor89@gmail.com>"
+  ],
+  "description": "A database that stores JSON data rows as compressed text within the zTXt chunks of PNG image files",
   "version": "0.1.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonaylor89/png-db"
+  },
   "files": [
     "png_db_bg.wasm",
     "png_db.js",
     "png_db.d.ts"
   ],
   "main": "png_db.js",
+  "homepage": "https://pngdb.jonaylor.com",
   "types": "png_db.d.ts",
   "sideEffects": [
     "./snippets/*"
+  ],
+  "keywords": [
+    "png",
+    "database",
+    "json",
+    "storage",
+    "compression"
   ]
 }

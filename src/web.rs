@@ -10,10 +10,6 @@ extern "C" {
     fn log(s: &str);
 }
 
-macro_rules! console_log {
-    ($($t:tt)*) => (log(&format_args!($($t)*).to_string()))
-}
-
 #[wasm_bindgen]
 pub struct WebPngDatabase {
     db: PngDatabase,

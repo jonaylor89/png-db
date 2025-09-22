@@ -6,8 +6,8 @@ type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 
 #[cfg(feature = "wasm")]
 pub mod web;
-use png::{Decoder, Encoder, ColorType, BitDepth};
 use serde::{Deserialize, Serialize};
+use png::{Decoder, Encoder, ColorType, BitDepth};
 use serde_json::Value;
 use std::collections::HashMap;
 #[cfg(not(target_arch = "wasm32"))]

@@ -3,11 +3,9 @@
 A simple database that stores JSON data rows as compressed text within the zTXt chunks of PNG image files. Each JSON row is associated with a pixel coordinate and can be queried using a simple SQL-like syntax.
 
 
-<!-- TODO: Add screenshot and replace with actual domain -->
-**Try it online**: [your-domain-here.com](https://your-domain-here.com)
+**Try it online**: [https://pngdb.jonaylor.com](https://pngdb.jonaylor.com)
 
-![Demo Screenshot](screenshot.png)
-<!-- TODO: Add screenshot of the web interface -->
+![Demo Screenshot](images/screenshot.png)
 
 ## Quick Start
 

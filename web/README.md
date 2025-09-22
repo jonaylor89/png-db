@@ -2,6 +2,21 @@
 
 A simple database that stores JSON data rows as compressed text within the zTXt chunks of PNG image files. Each JSON row is associated with a pixel coordinate and can be queried using a simple SQL-like syntax.
 
+
+<!-- TODO: Add screenshot and replace with actual domain -->
+**Try it online**: [your-domain-here.com](https://your-domain-here.com)
+
+![Demo Screenshot](screenshot.png)
+<!-- TODO: Add screenshot of the web interface -->
+
+## Quick Start
+
+```bash
+just        # List all available commands
+just serve  # Start web demo
+just demo   # Try CLI with sample data
+```
+
 ## Features
 
 - **PNG Storage**: Stores JSON data in PNG zTXt chunks while maintaining a valid image file
@@ -13,8 +28,20 @@ A simple database that stores JSON data rows as compressed text within the zTXt 
 
 ## Installation
 
+### CLI Version
+
+**Using Just (recommended):**
 ```bash
-cargo build --release
+just build  # Build CLI version
+just demo   # Create and test sample database
+```
+
+### Web Demo
+Try the [web demo](web/) to test the PNG database in your browser! The web version is compiled to WebAssembly and runs entirely in the browser.
+
+**Using Just (recommended):**
+```bash
+just serve  # Build WASM and start server
 ```
 
 ## Usage
@@ -138,15 +165,6 @@ PNG File
 └── IEND chunk (end marker)
 ```
 
-### Dependencies
-
-- `png` - PNG file manipulation
-- `serde` + `serde_json` - JSON serialization/deserialization  
-- `flate2` - zlib compression/decompression
-- `clap` - Command-line argument parsing
-- `color-eyre` - Error handling and reporting
-- `thiserror` - Error type definitions
-
 ## Limitations
 
 - **Query Complexity**: Only supports simple WHERE clauses with AND conditions
@@ -154,18 +172,3 @@ PNG File
 - **Performance**: Not optimized for large datasets - intended for small to medium data storage
 - **Concurrency**: No built-in support for concurrent access
 - **Indexing**: No indexing - queries perform linear scans
-
-## Future Enhancements
-
-- OR conditions in queries
-- Range queries for coordinates
-- JSON array/object field access
-- Better error messages
-- Performance optimizations
-- Data validation against schema
-- Batch operations
-- Transaction support
-
-## License
-
-MIT License

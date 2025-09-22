@@ -125,7 +125,7 @@ impl PngDatabase {
     #[cfg(not(target_arch = "wasm32"))]
     pub fn save_to_png(&self, filename: &str) -> Result<()> {
         let file = File::create(filename)?;
-        let ref mut w = BufWriter::new(file);
+        let w = &mut BufWriter::new(file);
         
         let mut encoder = Encoder::new(w, self.width, self.height);
         encoder.set_color(ColorType::Rgb);

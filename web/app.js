@@ -58,6 +58,57 @@ window.createDatabase = async function() {
     }
 }
 
+window.createSampleDatabase = async function() {
+    if (!wasmInitialized) {
+        await initWasm();
+        if (!wasmInitialized) return;
+    }
+
+    try {
+        showLoading(true);
+        clearError();
+
+        // Use predefined values for the sample database
+        const width = 256;
+        const height = 256;
+        const schema = '{"name":"string","age":"number"}';
+
+        // Update the UI form fields
+        document.getElementById('width').value = width;
+        document.getElementById('height').value = height;
+        document.getElementById('schema').value = schema;
+
+        // Create the database
+        currentDatabase = new WebPngDatabase(width, height, schema);
+
+        // Add sample data (matching the Justfile demo command)
+        const sampleData = [
+            { x: 10, y: 20, data: '{"name":"Alice","age":30}' },
+            { x: 50, y: 60, data: '{"name":"Bob","age":25}' }
+        ];
+
+        for (const item of sampleData) {
+            currentDatabase.insert(item.x, item.y, item.data);
+        }
+
+        const schemaObj = JSON.parse(schema);
+        const rowCount = currentDatabase.get_row_count();
+
+        showDatabaseInfo(`Sample database created (${width}x${height})`, schemaObj, rowCount);
+        showSections(true);
+        showResults(`✅ Sample database created with ${rowCount} rows of data!<br/>
+            <strong>Sample data:</strong><br/>
+            • Alice (age 30) at coordinates (10, 20)<br/>
+            • Bob (age 25) at coordinates (50, 60)<br/><br/>
+            Try querying with: <code>WHERE age > 28</code>`);
+
+    } catch (error) {
+        showError(`Failed to create sample database: ${error.message}`);
+    } finally {
+        showLoading(false);
+    }
+}
+
 window.loadDatabase = async function(fileInput) {
     if (!wasmInitialized) {
         await initWasm();

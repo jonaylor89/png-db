@@ -150,6 +150,22 @@ button:active {
     border-color: #000000;
 }
 
+.secondary-button {
+    background: #ffffff;
+    color: #1a1a1a;
+    border: 1px solid #d1d1d1;
+}
+
+.secondary-button:hover {
+    background: #f5f5f5;
+    border-color: #1a1a1a;
+}
+
+.secondary-button:active {
+    background: #e5e5e5;
+    border-color: #1a1a1a;
+}
+
 .db-info {
     background: #f9f9f9;
     border: 1px solid #e5e5e5;

@@ -1,5 +1,9 @@
 name: Publish to npm
 
+permissions:
+  id-token: write  # Required for Trusted Publishing
+  contents: read
+
 on:
   release:
     types: [published]
@@ -24,7 +28,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           registry-url: 'https://registry.npmjs.org'
 
       - name: Build WASM package
@@ -33,5 +37,3 @@ jobs:
       - name: Publish to npm
         working-directory: ./pkg
         run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

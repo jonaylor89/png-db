@@ -11,10 +11,13 @@ fi
 
 wasm-pack build --target web --features wasm --no-default-features
 
-echo "WASM package built successfully!"
-echo "You can now serve the web directory with any HTTP server."
-echo ""
-echo "For example:"
-echo "  cd web && python3 -m http.server 8000"
-echo "  or"
-echo "  cd web && npx serve ."
+# Copy only the necessary files, avoiding overwriting package.json if we want to manage it manually
+# Or we can just let it overwrite but we need to make sure the name is correct.
+# Given we want Changesets to manage the version, it's better to let Changesets manage web/package.json
+
+cp pkg/png_db_bg.wasm web/
+cp pkg/png_db.js web/
+cp pkg/png_db.d.ts web/
+cp pkg/png_db_bg.wasm.d.ts web/ 2>/dev/null || true
+
+echo "WASM artifacts copied to web/ directory!"

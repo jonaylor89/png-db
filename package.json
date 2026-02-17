@@ -1,0 +1,23 @@
+{
+  "name": "@jonaylor89/png-db",
+  "version": "0.1.0",
+  "private": false,
+  "description": "A database that stores JSON data rows as compressed text within the zTXt chunks of PNG image files",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonaylor89/png-db"
+  },
+  "scripts": {
+    "build": "./build-wasm.sh",
+    "prepare": "pnpm run build",
+    "version": "changeset version",
+    "release": "pnpm run build && changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT"
+}

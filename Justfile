@@ -4,22 +4,18 @@ build:
 
 # Build WASM version for web
 build-wasm:
-    wasm-pack build --target web --features wasm --no-default-features
-    cp -r pkg/* web/
+    ./build-wasm.sh
 
 # Run CLI tests
 test:
     cargo test
 
-# Serve web demo
-serve: build-wasm
-    cd web && python3 -m http.server 8000
-
 # Clean build artifacts
 clean:
     cargo clean
     rm -rf pkg/
-    rm -f web/*.wasm web/*.js web/*.d.ts web/package.json
+    rm -f web/png_db_bg.wasm web/png_db.js web/png_db.d.ts web/png_db_bg.wasm.d.ts web/package.json
+
 
 # Create a test database
 demo:

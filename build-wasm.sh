@@ -9,15 +9,24 @@ if ! command -v wasm-pack &> /dev/null; then
     curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 fi
 
+# Build WASM package
 wasm-pack build --target web --features wasm --no-default-features
 
-# Copy only the necessary files, avoiding overwriting package.json if we want to manage it manually
-# Or we can just let it overwrite but we need to make sure the name is correct.
-# Given we want Changesets to manage the version, it's better to let Changesets manage web/package.json
+# Update package name to include scope
+# Using node for reliable JSON manipulation across platforms
+if command -v node &> /dev/null; then
+    node -e "
+const fs = require('fs');
+const pkg = JSON.parse(fs.readFileSync('pkg/package.json', 'utf8'));
+pkg.name = '@jonaylor89/png-db';
+fs.writeFileSync('pkg/package.json', JSON.stringify(pkg, null, 2) + '\n');
+"
+    echo "✓ Updated package name to @jonaylor89/png-db"
+else
+    # Fallback to sed for systems without node
+    sed -i.bak 's/"name": "png-db"/"name": "@jonaylor89\/png-db"/' pkg/package.json
+    rm -f pkg/package.json.bak
+    echo "✓ Updated package name to @jonaylor89/png-db"
+fi
 
-cp pkg/png_db_bg.wasm web/
-cp pkg/png_db.js web/
-cp pkg/png_db.d.ts web/
-cp pkg/png_db_bg.wasm.d.ts web/ 2>/dev/null || true
-
-echo "WASM artifacts copied to web/ directory!"
+echo "WASM package built successfully in ./pkg/"

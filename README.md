@@ -26,6 +26,32 @@ just demo   # Try CLI with sample data
 
 ## Installation
 
+### NPM Package (WASM)
+
+```bash
+npm install @jonaylor89/png-db
+```
+
+```javascript
+import init, { PngDb } from '@jonaylor89/png-db';
+
+await init();
+
+// Create a new database
+const db = PngDb.create(500, 500, { name: 'string', age: 'number' });
+
+// Insert data
+db.insert(10, 20, { name: 'Alice', age: 30 });
+db.insert(50, 60, { name: 'Bob', age: 25 });
+
+// Query data
+const results = db.query('WHERE age > 28');
+console.log(results);
+
+// Save to file (in Node.js) or get bytes for browser download
+const pngBytes = db.to_bytes();
+```
+
 ### CLI Version
 
 **Using Just (recommended):**
@@ -34,12 +60,9 @@ just build  # Build CLI version
 just demo   # Create and test sample database
 ```
 
-### Web Demo
-Try the [web demo](web/) to test the PNG database in your browser! The web version is compiled to WebAssembly and runs entirely in the browser.
-
-**Using Just (recommended):**
+Or install from crates.io (coming soon):
 ```bash
-just serve  # Build WASM and start server
+cargo install png-db
 ```
 
 ## Usage

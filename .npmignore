@@ -1,0 +1,4 @@
+# This file is for the root directory, but we publish from pkg/
+# so this mainly prevents accidental publishes from root
+*
+!pkg/

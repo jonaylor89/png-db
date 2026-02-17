@@ -12,4 +12,4 @@ git_release_body = "{{changelog}}"
 git_tag_name = "v{{version}}"
 
 # Publish to crates.io (set to false if you don't want this)
-publish = false
+publish = true

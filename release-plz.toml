@@ -1,0 +1,15 @@
+[workspace]
+# Automatically create GitHub releases when release PR is merged
+git_release_enable = true
+
+# Release name format (e.g., "v0.2.0")
+git_release_name = "v{{version}}"
+
+# Use the changelog as the release body
+git_release_body = "{{changelog}}"
+
+# Tag format (e.g., "v0.2.0")
+git_tag_name = "v{{version}}"
+
+# Publish to crates.io (set to false if you don't want this)
+publish = false
